@@ -12,11 +12,16 @@ resource "azurerm_sql_server" "sql_server" {
 }
 
 resource "azurerm_sql_database" "sql_database" {
-  for_each            = local.sql_database
-  name                = each.key
-  resource_group_name = var.sql_resource_group_name
-  location            = var.sql_location
-  server_name         = var.sql_server_name
+  for_each                         = local.sql_database
+  name                             = each.key
+  resource_group_name              = var.sql_resource_group_name
+  location                         = var.sql_location
+  server_name                      = var.sql_server_name
+  edition                          = var.sql_database_edition
+  collation                        = var.sql_database_collation
+  create_mode                      = var.sql_database_create_mode
+  requested_service_objective_name = var.sql_database_requested_service_objective_name
+  depends_on                       = [azurerm_sql_server.sql_server]
 }
 
 # resource "azurerm_sql_failover_group" "sql_failover_group" {
@@ -32,4 +37,5 @@ resource "azurerm_sql_database" "sql_database" {
 #     mode          = var.sql_failover_group_mode
 #     grace_minutes = var.sql_failover_group_grace_minutes
 #   }
+#   depends_on          = [azurerm_sql_database.sql_database]
 # }
