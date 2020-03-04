@@ -32,6 +32,22 @@ variable "sql_database_name" {
   default = null
 }
 
+variable "sql_database_edition" {
+  default = null
+}
+
+variable "sql_database_collation" {
+  default = null
+}
+
+variable "sql_database_create_mode" {
+  default = null
+}
+
+variable "sql_database_requested_service_objective_name" {
+  default = null
+}
+
 # SQL failover group
 
 variable "sql_failover_group_name" {
